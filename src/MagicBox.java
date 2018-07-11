@@ -6,6 +6,7 @@
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -34,7 +35,8 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 
 	public static void main(String[] args) throws Exception {
 		SwingUtilities.invokeLater(new MagicBox());
-	
+		
+		
 		
 		
 	}
@@ -48,11 +50,13 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 			System.err.println(w.getMessage());
 		}
 	}
-
+	Image img;
 	private void createUI() {
 		JFrame frame = new JFrame("The Magic Box contains many secrets...");
 		frame.add(this);
+		img  = backgroundImage.getScaledInstance(500, 750, 0);
 		setPreferredSize(new Dimension(backgroundImage.getWidth(), backgroundImage.getHeight()));
+		frame.addMouseListener(this);
 		frame.pack();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
@@ -69,13 +73,13 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 
 	@Override
 	public void paintComponent(Graphics g) {
-		g.drawImage(backgroundImage, 0, 0, null);
+		g.drawImage(img, 0, 0, null);
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		playMusicOnComputer();
 	}
 
 	@Override
