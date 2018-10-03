@@ -28,10 +28,13 @@ public class Jukebox implements Runnable {
            public void run() {
 
 		// 3. Find an mp3 on your computer or on the Internet.
-		// 4. Create a Song
-
+        	   
+		// 4
+        	Song elmo = new Song("elmo.mp3"); 
+        	elmo.play();
+        	
 		// 5. Play the Song
-
+        	
 		/*
 		 * 6. Create a user interface for your Jukebox so that the user can to
 		 * choose which song to play. You can use can use a different button for
