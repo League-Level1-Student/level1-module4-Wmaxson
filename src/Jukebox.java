@@ -4,14 +4,22 @@
  */
 
 
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
+import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import javazoom.jl.player.advanced.AdvancedPlayer;
@@ -19,8 +27,15 @@ import javazoom.jl.player.advanced.AdvancedPlayer;
 /* 1. Download the JavaZoom jar from here: http://bit.ly/javazoom
  * 2. Right click your project and add it as an External JAR (Under Java Build Path > Libraries).*/
 
-public class Jukebox implements Runnable {
-
+public class Jukebox implements Runnable, ActionListener {
+	// Stuff
+	JButton elmo = new JButton();
+	JButton blank = new JButton();
+	
+	JFrame Frame = new JFrame();
+	JPanel Panel = new JPanel();
+	//Stuff
+	
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Jukebox());
 	}
@@ -30,11 +45,14 @@ public class Jukebox implements Runnable {
 		// 3. Find an mp3 on your computer or on the Internet.
         	   
 		// 4
-        	Song elmo = new Song("elmo.mp3"); 
-        	elmo.play();
+        	//Song elmo = new Song("elmo.mp3"); 
+        	//elmo.play();
         	
 		// 5. Play the Song
         	
+        	   
+        	   
+        	   
 		/*
 		 * 6. Create a user interface for your Jukebox so that the user can to
 		 * choose which song to play. You can use can use a different button for
@@ -42,12 +60,69 @@ public class Jukebox implements Runnable {
 		 * cover is clicked, stop the currently playing song, and play the one
 		 * that was selected.
 		 */
+        	   
+        	   //code starts here.
+        	   
+        	   Frame.add(Panel);
+       		// 2. Make the frame visible
+       		Frame.setVisible(true);
+       		// 5. Add an action listener to the leftButton
+       		elmo.addActionListener(this);
+       		// 6. Add an action listener to the rightButton
+       		blank.addActionListener(this);
+       		// 7. Add the leftButton to the panel
+       		Panel.add(elmo);
+       		// 8. Add the rightButton to the panel
+       		Panel.add(blank);
+       		
+       		// 9. Pack the frame
+       		Frame.pack();
+       		try {
+				elmo.setIcon(new ImageIcon(ImageIO.read(this.getClass().getResourceAsStream("index.jpeg"))));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+       		try {
+				blank.setIcon(new ImageIcon(ImageIO.read(this.getClass().getResourceAsStream("despacito2.jpg"))));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        	   
+        	   
           }
-	/* Use this method to add album covers to your Panel. */
+           
+     
+ 
 	private JLabel loadImage(String fileName) {
 		URL imageURL = getClass().getResource(fileName);
 		Icon icon = new ImageIcon(imageURL);
 		return new JLabel(icon);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+JButton buttonPressed = (JButton) e.getSource();
+		
+		
+		/* If the buttonPressed was the leftButton....*/
+			// Set the text of the rightButton to "No, click Me!"
+			// Set the PREFERRED size of the rightButton to BIG
+			// Set the text of the leftButton to "Click Me!"
+			// Set the PREFERRED size of the leftButton to SMALL
+		if (buttonPressed == elmo) {
+			Song elmo1 = new Song("elmo.mp3"); 
+        	elmo1.play();
+		}
+		if (buttonPressed == blank) {
+			
+		}
+		/* If the buttonPressed was the rightButton, do the opposite. */
+		
+
+		Frame.pack();
 	}
 
 }
@@ -135,5 +210,18 @@ class Song {
 			return this.getClass().getResourceAsStream(songAddress);
 		}
 	}
+	public static ImageIcon loadImage(){
+		try {
+			return new ImageIcon(ImageIO.read(new MyFirstSwingGUI().getClass().getResourceAsStream("java.png")));
+		} catch (IOException e) {
+			
+			return null;
+		}
+	}
+	
 }
+
+
+
+
 
