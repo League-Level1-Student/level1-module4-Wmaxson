@@ -52,6 +52,7 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 	}
 	Image img;
 	private void createUI() {
+		MediaPalace media = new MediaPalace();
 		JFrame frame = new JFrame("The Magic Box contains many secrets...");
 		frame.add(this);
 		img  = backgroundImage.getScaledInstance(500, 750, 0);
@@ -73,14 +74,29 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 
 	@Override
 	public void paintComponent(Graphics g) {
-		g.drawImage(img, 0, 0, null);
+		g.drawImage(img, 0, 0, null); 
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		playMusicOnComputer();
-	}
+		int mX = e.getX();
+		int mY = e.getY();
+		System.out.println(mY + "Y and " + mX + "X");
+		if (mX >= 140 && mX <= 160 && mY >= 530 && mY <= 570  ) {
+			System.out.println("Eligha is gay.");
+			speak("Ur mum heterosexual"); //
+		}
+		if (mX >= 143 && mX <= 168 && mY >= 332 && mY <= 359  ) {
+			System.out.println("Eligha is gay.");
+			speak("Ur mum very nice lady"); //
+		}
+		if (mX >= 269 && mX <= 264 && mY >= 410 && mY <= 393  ) {
+			System.out.println("Eligha is gay.");
+			speak("Gateway to 6:30 coding class: aka hell"); //
+		}
+	
+	}// there are 10 kinds of people in the world. people who undertsand binary, and the people who don't.
 
 	@Override
 	public void mousePressed(MouseEvent e) {
@@ -106,6 +122,13 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 		
 	}
 
+	void speak(String words) {
+		try {
+			Runtime.getRuntime().exec("say " + words).waitFor();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
 
 
